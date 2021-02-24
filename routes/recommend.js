@@ -12,14 +12,14 @@ const Topic_PriceSchema = new mongoose.Schema({
 app.get('/:id', (req, res) => {
   async function getRecommendation() {
     const id = req.params.id;
-    let url = "http://127.0.0.1:3000/test_score/" + id, settings = { method: "Get" }, result = [];
+      let url = "https://course-recommendation-api.herokuapp.com/test_score/" + id, settings = { method: "Get" }, result = [];
 
     await fetch(url, settings)
       .then(res2 => res2.json())
       .then((json) => {
         result = json[0].topicScore;
       });
-    
+
     const collection = "Topic_Price";
     let Query;
     try {
@@ -37,7 +37,7 @@ app.get('/:id', (req, res) => {
     }
     res.send(result);
   }
-  
+
   getRecommendation();
 });
 
